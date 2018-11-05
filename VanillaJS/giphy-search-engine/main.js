@@ -34,10 +34,17 @@ inputArea.addEventListener('keyup', (e) => {
 
 // 3. GIF 파일들을 index.html에 밀어 넣는다.
 const pushToDOM = (parsedData) => {
-    //console.log(parsedData.data[0].images.fixed_height.url);
-
     const resultArea = document.querySelector("#result-area");
-    let imageURL = parsedData.data[1].images.fixed_height.url;
-    resultArea.innerHTML = `<img src="${imageURL}" alt="monkey"/>`;
+    const DataSet = parsedData.data;
+    // console.log(DataSet);
+
+    // iterator
+    DataSet.forEach((imageData) => {
+        let imageURL = imageData.images.fixed_height.url;
+        let imageALT = imageData.title;
+        resultArea.innerHTML += `<img src="${imageURL}" alt="${imageALT}"/>`;
+    });
+
+    // let imageURL = parsedData.data[1].images.fixed_height.url;
 
 }
