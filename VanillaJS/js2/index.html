@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>JS2</title>
+
+</head>
+<body>
+    <h1 id="hphk">Happy hacking!</h1>
+    
+    <div>
+        <a href="#" id="a">who said that</a>
+    </div>
+
+    <div>
+        <a href="#" id="b">said what</a>
+    </div>
+    
+    <script>
+    const h1 = document.querySelector('#hphk');
+    const a = document.querySelector('#a');
+    const b = document.querySelector('#b');
+    a.addEventListener('click', () => {
+        h1.innerHTML = "kim";
+    });
+    b.addEventListener('click', () => {
+        h1.innerHTML = "park";
+    });
+
+    </script>
+
+</body>
+</html>
