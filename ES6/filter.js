@@ -36,7 +36,12 @@ var users = [
 ]
 var admins = users.filter(user => user.admin);
 
+
 function reject(array, iterFunction){
 
 }
-var lessThan15 = reject
+var lessThan15 = reject(numbers, function(number){
+    return number > 15;
+})
+
+console.log(lessThan15)
