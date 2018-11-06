@@ -1,5 +1,6 @@
 /* 1. 검색 */
-
+const inputArea = document.querySelector();
+const button = document.querySelector();
 
 /* 2. SoundCloud API  사용하기 */
 const SoundCloudAPI = {
@@ -54,6 +55,9 @@ SoundCloudAPI.rendertracks = (tracks) => {
         // Button
         const button = document.createElement('div');
         button.classList.add("ui", "bottom", "attached", "button-js-button");
+        button.addEventListener('click', (e) => {
+            SoundCloudAPI.addPlaylist(track.permalink_url);
+        });
         
         const icon = document.createElement('i');
         icon.classList.add("add", "icon");
@@ -75,15 +79,22 @@ SoundCloudAPI.rendertracks = (tracks) => {
         const searchResults = document.querySelector('#js-search-results');
         searchResults.appendChild(card);
     });
-
-
 };
 
 SoundCloudAPI.getTrack('busker');
 
 /* 4. Playlist 에 추가하고 실제로 재생하기 */
-SC.oEmbed('http://soundcloud.com/forss/flickermood', {
-  auto_play: true
-}).then(function(embed){
-  console.log('oEmbed response: ', embed);
-});
+
+SoundCloudAPI.addPlaylist = (trackURL) => {
+    SC.oEmbed(trackURL, {auto_play: true})
+    .then(function(embed){
+      //console.log(embed.html);
+      const sidebar = document.querySelector("#js-playlist");
+      const playbox = document.createElement("div");
+      playbox.innerHTML = embed.html;
+      sidebar.insertBefore(playbox, sidebar.firstChild);
+    });
+};
+
+
+
