@@ -1,6 +1,27 @@
 /* 1. 검색 */
-const inputArea = document.querySelector();
-const button = document.querySelector();
+//const sb = document.querySelector('#js-playlist')
+const sidebar = document.querySelector("#js-playlist");
+sidebar.innerHTML = localStorage.getItem('playlist');
+const inputArea = document.querySelector('#js-input');
+const button = document.querySelector('#js-search');
+
+button.addEventListener('click', () => {
+    const searchValue = document.querySelector('#js-input').value;
+    SoundCloudAPI.getTrack(searchValue);
+});
+
+inputArea.addEventListener('keyup', (e) => {
+    const keyValue = document.querySelector('#js-search').value;
+    if(e.which === 13){
+        SoundCloudAPI.getTrack(keyValue);
+    }
+});
+
+const resetButton = document.querySelector('#js-reset');
+resetButton.addEventListener('click', () => {
+    localStorage.clear();
+    sidebar.innerHTML = null;
+});
 
 /* 2. SoundCloud API  사용하기 */
 const SoundCloudAPI = {
@@ -23,7 +44,8 @@ SoundCloudAPI.init();
 
 /* 3. 카드 보여주기 */
 SoundCloudAPI.rendertracks = (tracks) => {
-
+    let searchResults = document.querySelector('#js-search-results');
+    searchResults.innerHTML = null;
     tracks.forEach((track) => {
         
         const card = document.createElement('div');
@@ -76,12 +98,12 @@ SoundCloudAPI.rendertracks = (tracks) => {
         card.appendChild(content);
         card.appendChild(button);
         
-        const searchResults = document.querySelector('#js-search-results');
+        // const searchResults = document.querySelector('#js-search-results');
         searchResults.appendChild(card);
     });
 };
 
-SoundCloudAPI.getTrack('busker');
+//SoundCloudAPI.getTrack('busker');
 
 /* 4. Playlist 에 추가하고 실제로 재생하기 */
 
@@ -89,12 +111,18 @@ SoundCloudAPI.addPlaylist = (trackURL) => {
     SC.oEmbed(trackURL, {auto_play: true})
     .then(function(embed){
       //console.log(embed.html);
-      const sidebar = document.querySelector("#js-playlist");
+    
       const playbox = document.createElement("div");
       playbox.innerHTML = embed.html;
       sidebar.insertBefore(playbox, sidebar.firstChild);
+
+      //local storage
+      //ownPlaylist = localStorage;
+      localStorage.setItem('playlist', sidebar.innerHTML);
+      console.log(localStorage);
     });
 };
+
 
 
 
