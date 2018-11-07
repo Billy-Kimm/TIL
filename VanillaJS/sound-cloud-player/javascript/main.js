@@ -131,6 +131,3 @@ const SoundCloudAPI = {
 };
 
 SoundCloudAPI.init();
-
-
-

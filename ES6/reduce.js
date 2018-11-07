@@ -73,7 +73,6 @@ var deskTypes = desks.reduce(function(acc, desk){
 },{sitting:0, standing:0});
 
 // 실습3
-
 function unique(array){
     array.reduce(function(acc, element){
         if(!acc.find(function(uniqElement){
@@ -83,16 +82,7 @@ function unique(array){
             }
             return acc;
     }, []);
-    
-//    var min = array.min();
-//    var max = array.max();
-
-//    var result = array.reduce(function(acc, element){
-//        if(element.length > max){
-//            break;
-//        }
-//        return min++; 
-//    },[])
 }
 var numbers = [4,1,3,2,2,1,3,3,4,4,4];
 unique(numbers);    //[1,2,3,4]
+
