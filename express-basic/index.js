@@ -1,11 +1,15 @@
 const express = require('express');
 const app = express();
 
+// Json parsing을 위한 함수
+app.use(express.json());
+
 // 임시 DB
 const movies = [
     {id:1, title:'dark night'},
     {id:2, title:'money ball'},
     {id:3, title:'river runs through it'},
+
 ];
 
 app.get('/', (req, res) => {
@@ -38,7 +42,14 @@ app.get('/api/movies/:id', (req,res)=> {
 });
 
 // // POST api/movies/
-// app.post();
+app.post('/api/movies', (req, res) => {
+    const movie = {
+        id: movies.length+1,
+        title: req.body.title,
+    }; 
+    movies.push(movie);
+    res.send(movie);
+});
 
 // // PUT api/movies/1
 // app.put();
