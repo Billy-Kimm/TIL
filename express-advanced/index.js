@@ -36,9 +36,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // public 폴더에서 static 파일을 사용 url은 root후 바로 public 폴더이름으로함.
 app.use(express.static('public'));
-
 app.use(logger);
 app.use(auth);
+
+app.set('view engine', 'pug');
+app.set('views', './views'); // default
 
 const movies = [
   { id: 1, title: 'Bohemian Rhapsody' },
@@ -47,7 +49,10 @@ const movies = [
 ];
 
 app.get('/', (req, res) => {
-  res.send('Happy Hacking');
+    res.render('index',{
+        title: 'Happy hacking',
+        greeting: 'may you have happy hacking'
+    })
 });
 
 app.get('/:name', (req, res) => {
