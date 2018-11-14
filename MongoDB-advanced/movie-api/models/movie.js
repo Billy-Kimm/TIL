@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
+const { genreSchema } = require('./genre');
 
 const movieShema = new mongoose.Schema({
     title: {
@@ -15,6 +16,10 @@ const movieShema = new mongoose.Schema({
     mainActor: {
         type:String,
         minlength: 1,
+    },
+    genre: {
+        type: genreSchema,
+        require: true
     }
 });
 
@@ -24,7 +29,8 @@ function validateMovie(movie){
     const schema = {
         title: Joi.string().min(5).max(255),
         release: Joi.date(),
-        mainActor: Joi.string().min(1)
+        mainActor: Joi.string().min(1),
+        genreId: Joi.string.required()
     }
     return Joi.validate(movie, schema);
 }
