@@ -17,19 +17,19 @@ const movies = [{
 ];
 
 /* GET /api/movies */
-router.get('/api/movies', (req, res) => {
+router.get('/', (req, res) => {
     res.send(movies);
 });
 
 /* GET /api/movies/1 */
-router.get('/api/movies/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const movie = getMovie(movies, parseInt(req.params.id));
     if (!movie) res.status(404).send(`Movie with given id(${req.params.id}) is not found.`);
     res.send(movie);
 });
 
 /* POST /api/movies */
-router.post('/api/movies', (req, res) => {
+router.post('/', (req, res) => {
     const {
         error
     } = validateMovie(req.body)
@@ -46,7 +46,7 @@ router.post('/api/movies', (req, res) => {
 });
 
 /* PUT /api/movies/1 */
-router.put('/api/movies/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const movie = getMovie(movies, parseInt(req.params.id));
     if (!movie) return res.status(404).send(`The movie with the given ID(${req.params.id}) was not found`);
 
@@ -62,7 +62,7 @@ router.put('/api/movies/:id', (req, res) => {
 });
 
 /* DELETE /api/movies/1 */
-router.delete('/api/movies/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const movie = getMovie(movies, parseInt(req.params.id));
     if (!movie) return res.status(404).send(`The movie with the given ID(${req.params.id}) was not found`);
 
