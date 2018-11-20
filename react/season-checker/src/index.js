@@ -14,36 +14,32 @@ class App extends React.Component {
     };
 //   }
 
-  render() {
-    // 사용자 허용함
+  renderContent(){
     if (!this.state.errorMessage && this.state.lat) {
-      return (<SeasonDisplay lat={this.state.lat}/>);
-    }
-
-    // 사용자 거부함
-    if (this.state.errorMessage && !this.state.lat) {
-      return (<div>Error: {this.state.errorMessage}</div>);
+        return (<SeasonDisplay lat={this.state.lat}/>);
+      }
+  
+      // 사용자 거부함
+      if (this.state.errorMessage && !this.state.lat) {
+        return (<div>Error: {this.state.errorMessage}</div>);
+      }
+      
+      // 허용/거부 기다리는 중..
+      return(<Spinner message='where are you?'/>);
     }
     
-    // 허용/거부 기다리는 중..
-    return(<Spinner message='where are you?'/>);
-  }
+    render(){
+        return (
+            <div style={{border:'solid rex 2px'}}>
+                {this.renderContent()}
+            </div>
+        )
+    }
 
-    componentDidMount(){
-        window.navigator.geolocation.getCurrentPosition(
-            position => {
-              this.setState({ lat: position.coords.latitude });
-            },
-            error => { 
-              this.setState({ errorMessage: error.message });
-            }
-          );
-    }
-            
-    componentDidUpdate(){
-        console.log('컴포넌트 update $ re-rendering');
-    }
-}
+};
+
+  
+    // 사용자 허용함
 
 
 
