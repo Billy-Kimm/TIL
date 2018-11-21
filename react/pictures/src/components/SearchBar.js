@@ -6,10 +6,6 @@ class SearchBar extends Component {
         keyword: ''
     }
 
-    componentDidUpdate(){
-        console.log(this.state);
-    }
-
     removeBadWrods(input){
         this.setState({ keyword: input }, () => {
             if(/.*fool.*/i.test(this.state.keyword)) {
@@ -19,31 +15,22 @@ class SearchBar extends Component {
         });
     }
 
-    // afterUserInput(event){
-    //     this.setState(event.target.value)
-    // }
-
-    // onInputChange(event){
-    //     console.log(event.target.value);
-    // }
-
-    // onInputClick(event){
-    //     console.log('click');
-    // }
-
-    render() {
+    onFormSubmit = (event) => {
+        event.preventDefault();
+        this.props.onUserSubmit(this.state.keyword);
+    }
+    
+    render = () => {
         return (
           <div className="ui segment container">
-            <form className='ui form'>
+            {/* </div><form onSubmit={e => this.onFormSubmit(e)} className='ui form'> */}
+            <form onSubmit={this.onFormSubmit} className='ui form'>
                 <label htmlFor="keyword">Search</label>
              <input 
              id='keyword' 
              type="text"
              onChange={e => this.removeBadWrods(e.target.value)}
              value={this.state.keyword}
-             //  value={this.state.keyword}
-            //  onChange={this.onInputChange}
-            //  onClick={this.onInputClick}
              />
          </form>
          </div>
