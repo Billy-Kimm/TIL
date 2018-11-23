@@ -5,7 +5,7 @@ export default function ImageList(props) {
     const images = props.images.map(image => {
         return (<img
         key={image.id}
-        src={image.urls.regular} 
+        src={image.urls.small} 
         alt={image.description}
         />
         )
